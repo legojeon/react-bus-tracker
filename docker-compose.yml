@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # 전체 애플리케이션 서비스
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bus_info_app
+    ports:
+      - "20011:8000"
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./backend/app.db:/app/app.db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # 데이터베이스 서비스 (선택사항 - PostgreSQL 사용 시)
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: bus_info_db
+  #   environment:
+  #     - POSTGRES_DB=bus_info
+  #     - POSTGRES_USER=bus_user
+  #     - POSTGRES_PASSWORD=bus_password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   restart: unless-stopped
+
+ 
