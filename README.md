@@ -1,13 +1,16 @@
-# 🚌 Bus Info - 버스 정보 시스템
+# 🚌 언제와 - 버스 정보 시스템
 
-버스 정류소 검색, 실시간 도착 정보 조회, 즐겨찾기 기능을 제공하는 웹 애플리케이션입니다.
+매일 같은 버스를 타는 사람들이 매번 출발·도착을 검색할 필요 없이, 자주 타는 정류소와 노선을 즐겨찾기해 한 번에 확인할 수 있는 버스 도착 정보 서비스.
+서비스 바로가기: [bus.coco.io.kr](http://bus.coco.io.kr)
+
+---
 
 ## 🌟 주요 기능
 
 ### 🗺️ 지도 기반 검색
 - **네이버 지도 API**를 활용한 인터랙티브 지도
-- 현재 위치 기반 주변 정류소 검색
-- 정류소 클릭으로 상세 정보 조회
+- 정류소 클릭으로 버스 도착 정보 조회
+- 좌표 기반 주변 정류소 검색
 
 ### 🚏 실시간 버스 정보
 - **공공데이터 포털 API**를 통한 실시간 도착 정보
@@ -21,10 +24,27 @@
 
 ### 🔐 사용자 인증
 - 회원가입 및 로그인 기능
-- JWT 토큰 기반 인증
+- JWT 토큰 기반 인증 및 세션 관리
 - 사용자별 즐겨찾기 데이터 관리
 
-## 🏗️ 기술 스택
+---
+
+## 🖼️ 실행 화면
+### 메인 화면
+![메인 화면](https://github.com/legojeon/react-todo-list/blob/main/screen_shot/main2.png?raw=true)
+*할 일 목록을 추가, 삭제, 완료 처리할 수 있는 핵심 페이지입니다.*
+*날짜를 지정하여 마감일을 설정하거나(선택) 계획일을 설정할 수 있습니다.*
+
+<br/>
+
+### 캘린더 뷰
+![캘린더 뷰](https://github.com/legojeon/react-todo-list/blob/main/screen_shot/calendar_page.png?raw=true)
+*월별 달력 형태로 등록된 일정을 한눈에 확인할 수 있습니다.*
+*마감일을 설정했다면 기존 todo list처럼 기간으로 표시되는것이 아닌 시작일과 마감일에만 이벤트 블럭이 존재합니다.*
+
+---
+
+## 🛠 기술 스택
 
 ### Frontend
 - **React 19** - 사용자 인터페이스
@@ -36,7 +56,7 @@
 - **FastAPI** - Python 웹 프레임워크
 - **SQLAlchemy** - ORM 및 데이터베이스 관리
 - **SQLite** - 경량 데이터베이스
-- **JWT** - 사용자 인증
+- **JWT** - JSON Web Token을 사용하여 사용자 인증 처리
 - **Pydantic** - 데이터 검증
 
 ### DevOps
@@ -46,6 +66,8 @@
 ### External APIs
 - **네이버 지도 API** - 지도 서비스
 - **공공데이터 포털 API** - 버스 정보
+
+---
 
 ## 📁 프로젝트 구조
 
@@ -81,7 +103,18 @@ bus_info/
 └── 📄 README.md                   # 프로젝트 문서
 ```
 
-## 🚀 빠른 시작
+
+## ⚡ TL;DR — 빠른 실행 가이드
+```bash
+# 1. 저장소 클론
+git clone <repository-url>
+cd bus_info
+
+# 2. Docker 실행
+docker-compose up -d --build
+```
+
+## 🚀 실행 방법
 
 ### 1. 저장소 클론
 ```bash
@@ -170,6 +203,8 @@ npm install
 npm run dev
 ```
 
+---
+
 ## 📚 API 문서
 
 ### 인증 API
@@ -187,9 +222,18 @@ npm run dev
 - `POST /api/saved-routes/add` - 즐겨찾기 추가
 - `DELETE /api/saved-routes/remove` - 즐겨찾기 제거
 
+---
+
 ## 🔧 주요 컴포넌트
 
 ### Backend Components
+
+### MVC 구조
+이 프로젝트는 MVC (Model-View-Controller) 구조를 기반으로 설계되었습니다. MVC 패턴은 애플리케이션의 데이터를 관리하는 Model, 사용자와 상호작용하는 View, 그리고 비즈니스 로직을 처리하는 Controller로 나뉘어 코드의 유지보수성과 확장성을 높이는 구조입니다.
+- Model: 애플리케이션의 데이터를 관리하고, 데이터베이스와의 상호작용을 처리합니다.
+- View: 사용자 인터페이스를 나타내며, 사용자가 보는 화면을 구성합니다.
+- Controller: 사용자의 입력을 처리하고, 적절한 Model과 View를 연결하여 비즈니스 로직을 수행합니다.
+
 
 #### Models (`backend/app/models/`)
 - `UserModel` - 사용자 정보 관리
@@ -213,90 +257,6 @@ npm run dev
 - `Register` - 회원가입 폼
 - `Map` - 지도 및 정류소 검색
 - `Saved` - 즐겨찾기 관리
-
-## 🐳 Docker 설정
-
-### 단일 컨테이너 아키텍처
-- **Multi-stage Dockerfile**: 프론트엔드 빌드 → 백엔드 실행
-- **정적 파일 서빙**: FastAPI가 React 빌드 결과물 서빙
-- **상대경로 API**: 프론트엔드에서 백엔드 API 호출
-
-### 볼륨 마운트
-- `./backend/app.db:/app/app.db` - 데이터베이스 파일 동기화
-- 환경 변수는 `.env` 파일에서 로드
-
-## 🔍 문제 해결
-
-### 일반적인 문제들
-
-#### 1. 포트 충돌
-```bash
-# 사용 중인 포트 확인
-netstat -tulpn | grep :20011
-
-# Docker 컨테이너 재시작
-docker-compose restart
-```
-
-#### 2. 데이터베이스 접근 오류
-```bash
-# 데이터베이스 파일 권한 확인
-ls -la backend/app.db
-
-# 컨테이너 내부 확인
-docker-compose exec app ls -la /app/app.db
-```
-
-#### 3. API 키 오류
-- `.env` 파일의 API 키가 올바른지 확인
-- 네이버 지도 API의 도메인 등록 확인
-
-#### 4. 빌드 오류
-```bash
-# 캐시 삭제 후 재빌드
-docker-compose down
-docker system prune -f
-docker-compose up -d --build
-```
-
-## 📝 개발 가이드
-
-### 코드 스타일
-- **Python**: PEP 8 준수
-- **JavaScript**: ESLint 규칙 준수
-- **React**: 함수형 컴포넌트 사용
-
-### 새로운 기능 추가
-1. Backend: Model → Service → Controller → Router 순서로 구현
-2. Frontend: Feature 폴더에 컴포넌트 추가
-3. API 문서 업데이트
-
-### 테스트
-```bash
-# Backend 테스트
-cd backend
-python -m pytest
-
-# Frontend 테스트
-cd frontend
-npm test
-```
-
-## 🤝 기여하기
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 라이선스
-
-이 프로젝트는 MIT 라이선스 하에 배포됩니다.
-
-## 📞 문의
-
-프로젝트에 대한 문의사항이 있으시면 이슈를 생성해 주세요.
 
 ---
 
