@@ -30,20 +30,64 @@
 ---
 
 ## 🖼️ 실행 화면
-### 메인 화면
-![메인 화면](https://github.com/legojeon/react-todo-list/blob/main/screen_shot/main2.png?raw=true)
-*할 일 목록을 추가, 삭제, 완료 처리할 수 있는 핵심 페이지입니다.*
-*날짜를 지정하여 마감일을 설정하거나(선택) 계획일을 설정할 수 있습니다.*
 
-<br/>
+<p align="center">
+  <strong>전체 과정</strong><br/>
+  <img src="https://github.com/legojeon/react-bus-tracker/blob/main/screen_shot/process.gif?raw=true" alt="전체 과정" width="400"/><br/>
+  <em>전체적인 서비스의 흐름</em>
+</p>
 
-### 캘린더 뷰
-![캘린더 뷰](https://github.com/legojeon/react-todo-list/blob/main/screen_shot/calendar_page.png?raw=true)
-*월별 달력 형태로 등록된 일정을 한눈에 확인할 수 있습니다.*
-*마감일을 설정했다면 기존 todo list처럼 기간으로 표시되는것이 아닌 시작일과 마감일에만 이벤트 블럭이 존재합니다.*
+<table align="center">
+  <tr>
+    <td align="center" width="50%">
+      <strong>홈 화면</strong><br/>
+      <img src="https://github.com/legojeon/react-bus-tracker/blob/main/screen_shot/main.png?raw=true" alt="홈 화면" width="300"/><br/>
+      <em>원하는 서비스를 선택</em>
+    </td>
+    <td align="center" width="50%">
+      <strong>검색 화면</strong><br/>
+      <img src="https://github.com/legojeon/react-bus-tracker/blob/main/screen_shot/home1.png?raw=true" alt="검색 화면" width="300"/><br/>
+      <em>주로 이용하는 정류소를 검색</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <strong>검색 결과</strong><br/>
+      <img src="https://github.com/legojeon/react-bus-tracker/blob/main/screen_shot/search1.png?raw=true" alt="검색 결과" width="300"/><br/>
+      <em>정류소의 버스 노선을 확인하고 즐겨찾기에 등록</em>
+    </td>
+    <td align="center" width="50%">
+      <strong>즐겨찾기 탭</strong><br/>
+      <img src="https://github.com/legojeon/react-bus-tracker/blob/main/screen_shot/saved_list.png?raw=true" alt="즐겨찾기 탭" width="300"/><br/>
+      <em>즐겨찾기한 정류소,버스를 한눈에 확인</em>
+    </td>
+  </tr>
+</table>
+
+
+## 🌍 외부 API & 데이터
+
+이 프로젝트는 여러 외부 API와 데이터를 활용하여 실시간 버스 정보를 제공하며, 버스정류소 위치를 지도에서 표시합니다. 아래는 사용되는 주요 외부 API와 관련 데이터입니다.
+
+### 🚌 서울시 및 경기도 버스정류소 API : 정류소,노선 데이터 및 실시간 도착정보 제공
+- **서울특별시 정류소 정보 조회 API**: [서울특별시 정류소 정보 조회 서비스](https://www.data.go.kr/data/15000303/openapi.do)  
+- **경기도 버스 도착 정보 API**: [경기도 버스도착정보 조회](https://www.data.go.kr/data/15080346/openapi.do)  
+  
+### 🗺️ 서울시 및 경기도 버스정류소 데이터 : 모든 버스종류소의 위치 정보 및 데이터 제공
+- **서울시 버스정류소 위치 정보**: [서울시 버스정류소 위치정보](https://data.seoul.go.kr/dataList/OA-15067/S/1/datasetView.do)  
+- **경기도 버스정류소 현황 데이터**: [경기도 버스정류소 현황](https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=GDKWAGWYRKJYIRVX110226832213&infSeq=1)  
+
+### 🗺️ 네이버 지도 API
+- **API 문서**: [네이버 맵 API](https://navermaps.github.io/maps.js.ncp/)  
+  네이버 지도 API를 사용하여 버스정류소의 위치를 지도에 표시하고, 사용자가 지도 상에서 정류소를 쉽게 찾을 수 있도록 합니다.
+
+### 활용 방식
+- **버스정류소 데이터**: 서울시와 경기도의 버스정류소 데이터를 활용하여 각 지역의 버스정류소 위치를 지도에 표시합니다.
+- **버스 도착 정보 API**: 각 정류소에 대해 공공 API를 통해 실시간 버스 도착 정보를 조회하여 사용자에게 해당 버스의 예상 도착 시간 및 경유 노선을 제공합니다.
+
+이 외부 API와 데이터 소스를 통해 실시간 버스 정보와 정류소 위치를 정확하게 조회할 수 있습니다.
 
 ---
-
 ## 🛠 기술 스택
 
 ### Frontend
