@@ -1,6 +1,7 @@
 # 🚌 언제와 - 버스 정보 시스템
 
-매일 같은 버스를 타는 사람들이 매번 출발·도착을 검색할 필요 없이, 자주 타는 정류소와 노선을 즐겨찾기해 한 번에 확인할 수 있는 버스 도착 정보 서비스.
+매일 같은 버스를 타는 사람들이 매번 출발·도착을 검색할 필요 없이, 자주 타는 정류소와 노선을 즐겨찾기해 한 번에 확인할 수 있는 버스 도착 정보 서비스입니다.
+
 서비스 바로가기: [bus.coco.io.kr](http://bus.coco.io.kr)
 
 ---
@@ -36,6 +37,7 @@
   <img src="https://github.com/legojeon/react-bus-tracker/blob/main/screen_shot/process.gif?raw=true" alt="전체 과정" width="400"/><br/>
   <em>전체적인 서비스의 흐름</em>
 </p>
+
 
 <table align="center">
   <tr>
