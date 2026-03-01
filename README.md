@@ -71,15 +71,15 @@
 
 이 프로젝트는 여러 외부 API와 데이터를 활용하여 실시간 버스 정보를 제공하며, 버스정류소 위치를 지도에서 표시합니다. 아래는 사용되는 주요 외부 API와 관련 데이터입니다.
 
-### 🚌 서울시 및 경기도 버스정류소 API : 정류소,노선 데이터 및 실시간 도착정보 제공
+### 서울시 및 경기도 버스정류소 API : 정류소,노선 데이터 및 실시간 도착정보 제공
 - **서울특별시 정류소 정보 조회 API**: [서울특별시 정류소 정보 조회 서비스](https://www.data.go.kr/data/15000303/openapi.do)  
 - **경기도 버스 도착 정보 API**: [경기도 버스도착정보 조회](https://www.data.go.kr/data/15080346/openapi.do)  
   
-### 🗺️ 서울시 및 경기도 버스정류소 데이터 : 모든 버스종류소의 위치 정보 및 데이터 제공
+### 서울시 및 경기도 버스정류소 데이터 : 모든 버스종류소의 위치 정보 및 데이터 제공
 - **서울시 버스정류소 위치 정보**: [서울시 버스정류소 위치정보](https://data.seoul.go.kr/dataList/OA-15067/S/1/datasetView.do)  
 - **경기도 버스정류소 현황 데이터**: [경기도 버스정류소 현황](https://data.gg.go.kr/portal/data/service/selectServicePage.do?infId=GDKWAGWYRKJYIRVX110226832213&infSeq=1)  
 
-### 🗺️ 네이버 지도 API
+### 네이버 지도 API
 - **API 문서**: [네이버 맵 API](https://navermaps.github.io/maps.js.ncp/)  
   네이버 지도 API를 사용하여 버스정류소의 위치를 지도에 표시하고, 사용자가 지도 상에서 정류소를 쉽게 찾을 수 있도록 합니다.
 
@@ -147,106 +147,6 @@ bus_info/
 ├── 📄 docker-compose.yml         # Docker Compose 설정
 ├── 📄 .gitignore                  # Git 제외 파일
 └── 📄 README.md                   # 프로젝트 문서
-```
-
-
-## ⚡ TL;DR — 빠른 실행 가이드
-```bash
-# 1. 저장소 클론
-git clone <repository-url>
-cd bus_info
-
-# 2. Docker 실행
-docker-compose up -d --build
-```
-
-## 🚀 실행 방법
-
-### 1. 저장소 클론
-```bash
-git clone <repository-url>
-cd bus_info
-```
-
-### 2. 환경 변수 설정
-
-#### Backend 환경 변수 (`backend/.env`)
-```bash
-# 데이터베이스 설정
-DATABASE_URL=sqlite:///./app.db
-
-# 서버 설정
-API_HOST=0.0.0.0
-API_PORT=8000
-
-# JWT 설정
-SECRET_KEY=your-secret-key-here-change-in-production
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-
-# 애플리케이션 설정
-DEBUG=True
-ENVIRONMENT=development
-LOG_LEVEL=INFO
-
-# 공공데이터 포털 API 키
-DECODED_DATA_API_KEY=your-decoded-api-key-here
-ENCODED_DATA_API_KEY=your-encoded-api-key-here
-```
-
-#### Frontend 환경 변수 (`frontend/.env`)
-```bash
-# API URL (상대경로 사용)
-VITE_API_URL=
-
-# 네이버 지도 API
-VITE_NAVER_CLIENT_ID=your-naver-client-id-here
-VITE_NAVER_CLIENT_SECRET=your-naver-client-secret-here
-
-# 애플리케이션 환경
-VITE_APP_ENV=development
-```
-
-### 3. Docker로 실행
-```bash
-# 애플리케이션 빌드 및 실행
-docker-compose up -d --build
-
-# 로그 확인
-docker-compose logs -f
-```
-
-### 4. 접속
-- **애플리케이션**: http://localhost:20011
-
-## 🛠️ 개발 환경 설정
-
-### 로컬 개발 (Docker 없이)
-
-#### Backend 설정
-```bash
-cd backend
-
-# Python 가상환경 생성
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# 의존성 설치
-pip install -r requirements.txt
-
-# 애플리케이션 실행
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
-
-#### Frontend 설정
-```bash
-cd frontend
-
-# 의존성 설치
-npm install
-
-# 개발 서버 실행
-npm run dev
 ```
 
 ---
